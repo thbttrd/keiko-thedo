@@ -2,23 +2,32 @@ import styles from "./Home.module.css"
 import { Pokemon } from "components/Pokemon"
 import React from "react"
 
-const pokemonList = [
-  {
-    name: "Carapuce",
-    id: 7,
-  },
-  {
-    name: "Carabaffe",
-    id: 8,
-  },
-  {
-    name: "Tortank",
-    id: 9,
-  },
-]
+interface PokemonInfo {
+  id: number
+  name: string
+  height: number
+  weight: number
+}
+interface Pokemon {
+  name: string
+  id: number
+}
+
+function fetchPokemons() {
+  return fetch("http://localhost:8000/pokemons", { headers: { accept: "application/json" } }).then(response =>
+    response.json(),
+  )
+}
 
 export const Home = () => {
   const [filterValue, setFilterValue] = React.useState("")
+  const [pokemonList, updatePokemonList] = React.useState<PokemonInfo[]>([])
+
+  React.useEffect(() => {
+    fetchPokemons().then(pokemonData => {
+      updatePokemonList(pokemonData)
+    })
+  }, [])
 
   function filterPokemonsByName(pokemons: Pokemon[], name: string): Pokemon[] {
     return pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(name.toLowerCase()))
@@ -26,11 +35,6 @@ export const Home = () => {
 
   const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFilterValue(event.target.value)
-  }
-
-  interface Pokemon {
-    name: string
-    id: number
   }
 
   return (
