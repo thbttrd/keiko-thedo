@@ -1,16 +1,12 @@
+import React from "react"
 import styles from "./Home.module.css"
 import { Pokemon } from "components/Pokemon"
-import React from "react"
 
 interface PokemonInfo {
   id: number
   name: string
   height: number
   weight: number
-}
-interface Pokemon {
-  name: string
-  id: number
 }
 
 function fetchPokemons() {
@@ -29,7 +25,7 @@ export const Home = () => {
     })
   }, [])
 
-  function filterPokemonsByName(pokemons: Pokemon[], name: string): Pokemon[] {
+  function filterPokemonsByName(pokemons: PokemonInfo[], name: string): PokemonInfo[] {
     return pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(name.toLowerCase()))
   }
 
