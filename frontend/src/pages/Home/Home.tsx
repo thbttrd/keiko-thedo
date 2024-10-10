@@ -1,6 +1,7 @@
 import React from "react"
 import styles from "./Home.module.css"
 import { Pokemon } from "components/Pokemon"
+import { Loader } from "components/Loader"
 
 interface PokemonInfo {
   id: number
@@ -17,29 +18,35 @@ function fetchPokemons() {
 
 export const Home = () => {
   const [pokemonList, updatePokemonList] = React.useState<PokemonInfo[]>([])
+  const [isLoading, updateIsLoading] = React.useState(true)
 
   React.useEffect(() => {
     fetchPokemons().then(pokemonData => {
       updatePokemonList(pokemonData)
+      updateIsLoading(false)
     })
   }, [])
 
   return (
     <div className={styles.intro}>
       <h1>Pokedex</h1>
-      <div className={styles.pokegrid}>
-        {pokemonList.map(pokemon => {
-          return (
-            <Pokemon
-              name={pokemon.name}
-              id={pokemon.id}
-              key={pokemon.id}
-              weight={pokemon.weight}
-              height={pokemon.height}
-            />
-          )
-        })}
-      </div>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className={styles.pokegrid}>
+          {pokemonList.map(pokemon => {
+            return (
+              <Pokemon
+                name={pokemon.name}
+                id={pokemon.id}
+                key={pokemon.id}
+                weight={pokemon.weight}
+                height={pokemon.height}
+              />
+            )
+          })}
+        </div>
+      )}
     </div>
   )
 }
