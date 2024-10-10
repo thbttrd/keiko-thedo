@@ -1,19 +1,15 @@
 .intro {
   font-size: 20px;
+  text-align: center;
+}
+
+.pokegrid {
+  width: 90%;
   display: flex;
-  align-items: center;
-  flex-direction: column;
-  padding: 10px;
-}
-
-.input {
-  border-width: 2px;
-  border-style: inset;
-  border-color: rgb(118, 118, 118);
-  border-image: initial;
-}
-
-label {
-  margin-top: 1em;
-  margin-bottom: 0.5em;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  padding: 2.5px;
+  margin-left: auto;
+  margin-right: auto;
 }
