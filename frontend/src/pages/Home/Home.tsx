@@ -19,6 +19,7 @@ function fetchPokemons() {
 export const Home = () => {
   const [pokemonList, setPokemonList] = React.useState<PokemonInfo[]>([])
   const [isLoading, setIsLoading] = React.useState(true)
+  const [errorMessage, setErrorMessage] = React.useState("")
 
   React.useEffect(() => {
     fetchPokemons()
@@ -28,29 +29,35 @@ export const Home = () => {
       })
       .catch(() => {
         setIsLoading(false)
+        setErrorMessage("Error fetching pokemons")
+        console.log(errorMessage)
       })
   }, [])
 
   return (
     <div className={styles.intro}>
       <h1>Pokedex</h1>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <div className={styles.pokegrid}>
-          {pokemonList.map(pokemon => {
-            return (
-              <Pokemon
-                name={pokemon.name}
-                id={pokemon.id}
-                key={pokemon.id}
-                weight={pokemon.weight}
-                height={pokemon.height}
-              />
-            )
-          })}
-        </div>
-      )}
+      {(() => {
+        if (isLoading) {
+          return <Loader />
+        } else if (errorMessage) {
+          return <p>{errorMessage}</p>
+        } else {
+          return (
+            <div className={styles.pokegrid}>
+              {pokemonList.map(pokemon => (
+                <Pokemon
+                  name={pokemon.name}
+                  id={pokemon.id}
+                  key={pokemon.id}
+                  weight={pokemon.weight}
+                  height={pokemon.height}
+                />
+              ))}
+            </div>
+          )
+        }
+      })()}
     </div>
   )
 }
