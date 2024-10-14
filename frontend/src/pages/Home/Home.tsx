@@ -17,14 +17,18 @@ function fetchPokemons() {
 }
 
 export const Home = () => {
-  const [pokemonList, updatePokemonList] = React.useState<PokemonInfo[]>([])
-  const [isLoading, updateIsLoading] = React.useState(true)
+  const [pokemonList, setPokemonList] = React.useState<PokemonInfo[]>([])
+  const [isLoading, setIsLoading] = React.useState(true)
 
   React.useEffect(() => {
-    fetchPokemons().then(pokemonData => {
-      updatePokemonList(pokemonData)
-      updateIsLoading(false)
-    })
+    fetchPokemons()
+      .then(pokemonData => {
+        setPokemonList(pokemonData)
+        setIsLoading(false)
+      })
+      .catch(() => {
+        setIsLoading(false)
+      })
   }, [])
 
   return (
