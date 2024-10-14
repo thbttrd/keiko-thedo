@@ -1,6 +1,7 @@
 import React from "react"
 import styles from "./Home.module.css"
 import { Pokemon } from "components/Pokemon"
+import { Loader } from "components/Loader"
 
 interface PokemonInfo {
   id: number
@@ -16,38 +17,40 @@ function fetchPokemons() {
 }
 
 export const Home = () => {
-  const [filterValue, setFilterValue] = React.useState("")
-  const [pokemonList, updatePokemonList] = React.useState<PokemonInfo[]>([])
+  const [pokemonList, setPokemonList] = React.useState<PokemonInfo[]>([])
+  const [isLoading, setIsLoading] = React.useState(true)
 
   React.useEffect(() => {
-    fetchPokemons().then(pokemonData => {
-      updatePokemonList(pokemonData)
-    })
+    fetchPokemons()
+      .then(pokemonData => {
+        setPokemonList(pokemonData)
+        setIsLoading(false)
+      })
+      .catch(() => {
+        setIsLoading(false)
+      })
   }, [])
-
-  function filterPokemonsByName(pokemons: PokemonInfo[], name: string): PokemonInfo[] {
-    return pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(name.toLowerCase()))
-  }
-
-  const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFilterValue(event.target.value)
-  }
 
   return (
     <div className={styles.intro}>
-      <div>Bienvenue sur ton futur pokédex !</div>
-      <div>Tu vas pouvoir apprendre tout ce qu'il faut sur React et attraper des pokemons !</div>
-      <label htmlFor="pokemonFilter"> Choisis ton pokemon</label>
-      <input
-        id="pokemonFilter"
-        className={styles.input}
-        onChange={onInputChange}
-        placeholder="Id du Pokemon"
-        value={filterValue}
-      />
-      {filterPokemonsByName(pokemonList, filterValue).map(pokemon => {
-        return <Pokemon name={pokemon.name} id={pokemon.id} key={pokemon.id} />
-      })}
+      <h1>Pokedex</h1>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className={styles.pokegrid}>
+          {pokemonList.map(pokemon => {
+            return (
+              <Pokemon
+                name={pokemon.name}
+                id={pokemon.id}
+                key={pokemon.id}
+                weight={pokemon.weight}
+                height={pokemon.height}
+              />
+            )
+          })}
+        </div>
+      )}
     </div>
   )
 }
