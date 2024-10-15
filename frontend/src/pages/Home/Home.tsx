@@ -2,6 +2,7 @@ import React from "react"
 import styles from "./Home.module.css"
 import { Pokemon } from "components/Pokemon"
 import { Loader } from "components/Loader"
+import { Link } from "react-router-dom"
 
 interface PokemonInfo {
   id: number
@@ -48,13 +49,15 @@ export const Home = () => {
           return (
             <div className={styles.pokegrid}>
               {pokemonList.map(pokemon => (
-                <Pokemon
-                  name={pokemon.name}
-                  id={pokemon.id}
-                  key={pokemon.id}
-                  weight={pokemon.weight}
-                  height={pokemon.height}
-                />
+                <Link className={styles.linkreset} to={`/pokemon/${pokemon.id}`} key={pokemon.id}>
+                  <Pokemon
+                    name={pokemon.name}
+                    id={pokemon.id}
+                    key={pokemon.id}
+                    weight={pokemon.weight}
+                    height={pokemon.height}
+                  />
+                </Link>
               ))}
             </div>
           )
