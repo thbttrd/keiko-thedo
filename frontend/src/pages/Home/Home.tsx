@@ -10,10 +10,12 @@ interface PokemonInfo {
   weight: number
 }
 
-function fetchPokemons() {
-  return fetch("http://localhost:8000/pokemons", { headers: { accept: "application/json" } }).then(response =>
-    response.json(),
-  )
+const fetchPokemons = async () => {
+  const response = await fetch("http://localhost:8000/pokemons", {
+    headers: { accept: "application/json" },
+  })
+  const data = await response.json()
+  return data
 }
 
 export const Home = () => {
