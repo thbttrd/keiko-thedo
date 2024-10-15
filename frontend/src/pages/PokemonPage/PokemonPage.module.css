@@ -1,0 +1,36 @@
+.pokemonPage {
+  font-size: 20px;
+  text-align: center;
+}
+
+.pokemonInfo {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 25px;
+  padding: 2.5px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2em;
+}
+
+.pokemonElt {
+  width: 100%;
+  border: none;
+}
+
+.pokemonImgContainer {
+  width: 20%;
+  border: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.pokemonImgContainer img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
