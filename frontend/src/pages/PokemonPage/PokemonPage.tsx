@@ -31,10 +31,10 @@ const PokemonImages = ({ id }: { id: string }) => {
 
   return (
     <div className={styles.pokemonImgContainer}>
+      <img src={pokeImgFrontUrl} alt={`Pokemon ${id}`} />
+      <img src={pokeBackImgUrl} alt={`Pokemon ${id} back`} />
       <img src={pokeShinyImgUrl} alt={`Shiny Pokemon ${id}`} />
       <img src={pokeShinyBackImgUrl} alt={`Shiny Pokemon ${id} back`} />
-      <img src={pokeBackImgUrl} alt={`Pokemon ${id} back`} />
-      <img src={pokeImgFrontUrl} alt={`Pokemon ${id}`} />
     </div>
   )
 }
