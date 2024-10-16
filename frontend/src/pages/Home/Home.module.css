@@ -4,12 +4,23 @@
 }
 
 .pokegrid {
-  width: 90%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 25px;
   padding: 2.5px;
+}
+
+.pokeCard {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  padding: 0;
+  text-align: center;
+  border: double;
+  width: 80%;
   margin-left: auto;
   margin-right: auto;
+  padding-bottom: 1em;
+  border-width: 0.8em;
 }
