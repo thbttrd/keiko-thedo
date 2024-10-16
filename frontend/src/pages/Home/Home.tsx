@@ -19,6 +19,8 @@ const fetchPokemons = async () => {
   return data
 }
 
+const pokeImgBaseUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon"
+
 export const Home = () => {
   const [pokemonList, setPokemonList] = React.useState<PokemonInfo[]>([])
   const [isLoading, setIsLoading] = React.useState(true)
@@ -49,7 +51,8 @@ export const Home = () => {
           return (
             <div className={styles.pokegrid}>
               {pokemonList.map(pokemon => (
-                <Link className={styles.linkreset} to={`/pokemon/${pokemon.id}`} key={pokemon.id}>
+                <Link className={styles.pokeCard} to={`/pokemon/${pokemon.id}`} key={pokemon.id}>
+                  <img src={`${pokeImgBaseUrl}/${pokemon.id}.png`}></img>
                   <Pokemon
                     name={pokemon.name}
                     id={pokemon.id}

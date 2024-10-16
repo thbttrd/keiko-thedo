@@ -5,17 +5,11 @@ interface Props {
   id: number
   weight: number
   height: number
-  style?: string
-  hideImg?: boolean
 }
 
-export const Pokemon = ({ name, id, weight, height, style, hideImg }: Props) => {
-  const pokeBaseUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
-  const pokeUrl = `${pokeBaseUrl}/${id}.png`
-
+export const Pokemon = ({ name, id, weight, height }: Props) => {
   return (
-    <div className={style || styles.pokemon}>
-      {!hideImg && <img src={pokeUrl}></img>}
+    <div className={styles.pokemon}>
       <p>Name: {name}</p>
       <p>Id: {id} </p>
       <p>Weight: {weight}</p>

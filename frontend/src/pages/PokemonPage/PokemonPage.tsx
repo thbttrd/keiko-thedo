@@ -70,9 +70,7 @@ export const PokemonPage = () => {
           <h1>{pokemon.name}</h1>
           <PokemonImages id={id!} />
           <Pokemon
-            style={styles.pokemonElt}
             name={pokemon.name}
-            hideImg={true}
             id={pokemon.id}
             key={pokemon.id}
             weight={pokemon.weight}
